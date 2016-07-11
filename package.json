@@ -4,9 +4,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "gulp server.dev",
-    "dev": "gulp server.dev",
-    "prod": "gulp server.prod"
+    "start": "gulp server.production",
+    "development": "gulp server.development",
+    "staging": "gulp server.staging",
+    "production": "gulp server.production"
   },
   "engines": {
     "node": ">= 4.4.3 < 6"
