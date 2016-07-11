@@ -104,14 +104,14 @@ module.exports = function (app) {
             }
 
             if (!data) {
-                return cb(app.errorsClient.getError(['SESSION_NOT_FOUND']), null);
+                return cb(null, { result: {data: {success: true}}});
             }
 
             app.db.models.Session.remove({_id: data._id}, function(deleteError){
                 if (deleteError) {
                     return cb(app.errorsClient.getError('ERROR_WHILE_DELETING_SESSION'), null);
                 }
-                return cb(null, { result: {data: {success: true}}})
+                return cb(null, { result: {data: {success: true}}});
             });
         });
     };
