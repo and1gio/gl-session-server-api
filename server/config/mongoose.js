@@ -15,7 +15,7 @@ exports.default = function (app) {
 exports.staging = function (app) {
     return {
         mongoose: {
-            uri: 'mongodb://127.0.0.1:27017/msda-sessions-store'
+            uri: 'mongodb://192.168.4.169:27017/msda-sessions-store'
         }
     }
 };
@@ -26,7 +26,7 @@ exports.staging = function (app) {
 exports.production = function (app) {
     return {
         mongoose: {
-            uri: 'mongodb://127.0.0.1:27017/msda-sessions-store'
+            uri: 'mongodb://192.168.4.169:27017/msda-sessions-store'
         }
     }
 };
