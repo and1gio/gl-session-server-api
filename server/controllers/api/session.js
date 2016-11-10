@@ -44,7 +44,7 @@ module.exports = function (app) {
                 if (saveError) {
                     return cb(app.errorsClient.getError('ERROR_WHILE_SAVING_SESSION'), null);
                 }
-                return cb(null, { result: {data: {success: true}}})
+                return cb(null, {result: {data: {success: true}}})
             });
         });
     };
@@ -65,12 +65,13 @@ module.exports = function (app) {
             }
 
             // TODO
-            if(data){
+            if (data) {
                 data.expireAt = app.moment().add(EXTEND_SESSION_BY_MINUTES, 'm');
-                data.save(function(saveError){});
+                data.save(function (saveError) {
+                });
             }
 
-            cb(null, {result: { data: data } });
+            cb(null, {result: {data: data}});
         });
     };
 
@@ -86,7 +87,7 @@ module.exports = function (app) {
             if (error) {
                 return cb(app.errorsClient.getError(['ERROR_WHILE_RETRIEVING_SESSION']), null);
             }
-            cb(null, {result: {data: data} });
+            cb(null, {result: {data: data}});
         });
     };
 
@@ -104,14 +105,14 @@ module.exports = function (app) {
             }
 
             if (!data) {
-                return cb(null, { result: {data: {success: true}}});
+                return cb(null, {result: {data: {success: true}}});
             }
 
-            app.db.models.Session.remove({_id: data._id}, function(deleteError){
+            app.db.models.Session.remove({_id: data._id}, function (deleteError) {
                 if (deleteError) {
                     return cb(app.errorsClient.getError('ERROR_WHILE_DELETING_SESSION'), null);
                 }
-                return cb(null, { result: {data: {success: true}}});
+                return cb(null, {result: {data: {success: true}}});
             });
         });
     };

@@ -1,6 +1,6 @@
 {
-  "name": "gl-session-server-api",
-  "description": "GL Session Server API",
+  "name": "z-session-server-api",
+  "description": "Z Session Server API",
   "version": "0.0.1",
   "private": true,
   "scripts": {
