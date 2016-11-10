@@ -1,4 +1,4 @@
-# gl-session-server-api
+# z-session-server-api
 
 **start development mode**
 ```
