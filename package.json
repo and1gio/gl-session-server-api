@@ -26,7 +26,7 @@
     "z-route-initializer": "0.0.2",
     "z-session-initializer": "0.0.3",
     "z-translate-client-initializer": "0.0.1",
-    "z-validator-initializer": "0.0.2",
+    "z-validator-initializer": "0.0.4",
     "moment": "2.14.1",
     "mongodb": "1.4.5",
     "mongoose": "4.1.8"
