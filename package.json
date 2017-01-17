@@ -4,32 +4,34 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "gulp server.production",
-    "development": "gulp server.development",
-    "staging": "gulp server.staging",
-    "production": "gulp server.production"
+    "start": "node ./app.js"
   },
   "engines": {
     "node": ">= 4.4.3 < 6"
   },
   "dependencies": {
-    "async": "1.5.2",
-    "body-parser": "1.15.0",
-    "camelcase": "1.2.1",
-    "cookie-parser": "1.4.1",
-    "debug": "2.2.0",
-    "express": "4.13.4",
-    "mime": "1.3.4",
+
+    "async": "2.0.1",
+    "camelcase": "3.0.0",
+    "lodash": "4.17.0",
+    "pug": "2.0.0-beta6",
+    "winston": "2.2.0",
+    "z-api-request-helper-initializer": "0.0.2",
+    "z-errors-client-initializer": "0.0.1",
+    "z-express-initializer": "0.0.3",
+    "z-file-server-client-initializer": "0.0.2",
+    "z-filter-initializer": "0.0.1",
+    "z-http-server-initializer": "0.0.2",
+    "z-route-controller-initializer": "0.0.3",
+    "z-route-initializer": "0.0.2",
+    "z-session-initializer": "0.0.3",
+    "z-translate-client-initializer": "0.0.1",
+    "z-validator-initializer": "0.0.2",
     "moment": "2.14.1",
     "mongodb": "1.4.5",
-    "mongoose": "4.1.8",
-    "morgan": "1.7.0",
-    "gl-errors-client": "0.0.3",
-    "gl-api-request-helper": "0.0.1",
-    "gl-translate-client": "0.0.1",
-    "request": "2.72.0",
-    "serve-favicon": "2.3.0",
-    "winston": "2.2.0"
+    "mongoose": "4.1.8"
+
+
   },
   "devDependencies": {
     "concurrently": "2.0.0",
