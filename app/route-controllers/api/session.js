@@ -12,13 +12,15 @@ module.exports = function (app) {
 
         app.mongoDB.models.Session.getBySessionToken(params.sessionToken, function (retrieveError, data) {
             if (retrieveError) {
-                return cb(app.errorsClient.getError(['ERROR_WHILE_RETRIEVING_SESSION']), null);
+                return cb([{keyword: 'ERROR_WHILE_RETRIEVING_SESSION'}], null);
             }
 
             if (data) {
                 data.sessionData = params.sessionData;
             } else {
                 data = new app.mongoDB.models.Session(params);
+                data.userToken = params.userToken;
+                data.sessionToken = params.sessionToken;
             }
 
             if (params.sessionData.inactiveMinutesBeforeSessionDies) {
@@ -29,7 +31,7 @@ module.exports = function (app) {
 
             data.save(function (saveError) {
                 if (saveError) {
-                    return cb(app.errorsClient.getError('ERROR_WHILE_SAVING_SESSION'), null);
+                    return cb([{keyword: 'ERROR_WHILE_SAVING_SESSION', e: saveError}], null);
                 }
                 return cb(null, {result: {data: {success: true}}})
             });
@@ -41,12 +43,12 @@ module.exports = function (app) {
 
         // TODO - we have to replace this with gl-params-validator module
         if (!params || !params.sessionToken) {
-            return cb(app.errorsClient.getError(['SESSION_TOKEN_REQUIRED']), null);
+            return cb([{keyword: 'SESSION_TOKEN_REQUIRED'}], null);
         }
 
         app.mongoDB.models.Session.getBySessionToken(params.sessionToken, function (error, data) {
             if (error) {
-                return cb(app.errorsClient.getError(['ERROR_WHILE_RETRIEVING_SESSION']), null);
+                return cb([{keyword: 'ERROR_WHILE_RETRIEVING_SESSION'}], null);
             }
 
             if (data) {
@@ -68,12 +70,12 @@ module.exports = function (app) {
 
         // TODO - we have to replace this with gl-params-validator module
         if (!params || !params.userToken) {
-            return cb(app.errorsClient.getError(['USER_TOKEN_REQUIRED']), null);
+            return cb([{keyword: 'USER_TOKEN_REQUIRED'}], null);
         }
 
         app.mongoDB.models.Session.getByUserToken(params.userToken, function (error, data) {
             if (error) {
-                return cb(app.errorsClient.getError(['ERROR_WHILE_RETRIEVING_SESSION']), null);
+                return cb([{keyword: 'ERROR_WHILE_RETRIEVING_SESSION'}], null);
             }
 
             if (data) {
@@ -95,12 +97,12 @@ module.exports = function (app) {
 
         // TODO - we have to replace this with gl-params-validator module
         if (!params || !params.sessionToken) {
-            return cb(app.errorsClient.getError(['SESSION_TOKEN_REQUIRED']), null);
+            return cb([{keyword: 'SESSION_TOKEN_REQUIRED'}], null);
         }
 
         app.mongoDB.models.Session.getBySessionToken(params.sessionToken, function (retrieveError, data) {
             if (retrieveError) {
-                return cb(app.errorsClient.getError(['ERROR_WHILE_RETRIEVING_SESSION']), null);
+                return cb([{keyword: 'ERROR_WHILE_RETRIEVING_SESSION'}], null);
             }
 
             if (!data) {
@@ -109,7 +111,7 @@ module.exports = function (app) {
 
             app.mongoDB.models.Session.remove({_id: data._id}, function (deleteError) {
                 if (deleteError) {
-                    return cb(app.errorsClient.getError('ERROR_WHILE_DELETING_SESSION'), null);
+                    return cb([{keyword: 'ERROR_WHILE_DELETING_SESSION'}], null);
                 }
                 return cb(null, {result: {data: {success: true}}});
             });

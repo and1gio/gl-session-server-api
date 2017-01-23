@@ -8,18 +8,10 @@ module.exports = function (app) {
         console.log("******* ERROR-HANDLER *******");
 
         var errors = null;
-        if (!err || typeof err != "object") {
-            errors = app.errorsClient.getError(["UNHANDLED_EXCEPTION"]);
-        } else if (!err || !(err instanceof Array) || err.length == 0) {
-            errors = app.errorsClient.getError(["BAD_RESPONSE_ERROR_OBJECT"]);
+        if (!err || !(err instanceof Array) || err.length == 0) {
+            errors = [{keyword: "UNHANDLED_EXCEPTION"}];
         } else {
             errors = err;
-        }
-
-        if (errors && errors.length > 0) {
-            for (var i in errors) {
-                errors[i].message = app.translateClient.get(app.config.app.defaultLanguage, errors[i].keyword);
-            }
         }
 
         res.json({error: errors});
