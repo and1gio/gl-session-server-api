@@ -15,13 +15,13 @@ module.exports = function (app) {
                 return cb([{keyword: 'ERROR_WHILE_RETRIEVING_SESSION'}], null);
             }
 
-            if (data) {
-                data.sessionData = params.sessionData;
-            } else {
+            if(!data){
                 data = new app.mongoDB.models.Session(params);
-                data.userToken = params.userToken;
-                data.sessionToken = params.sessionToken;
             }
+
+            data.userToken = params.userToken;
+            data.sessionToken = params.sessionToken;
+            data.sessionData = params.sessionData;
 
             if (params.sessionData.inactiveMinutesBeforeSessionDies) {
                 data.expireAt = app.moment().add(params.sessionData.inactiveMinutesBeforeSessionDies, EXTEND_SESSION_BY_DIMENSION);
