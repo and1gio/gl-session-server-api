@@ -4,7 +4,17 @@
 exports.default = function (app) {
     return {
         zErrorsClient: {
-            host: 'bl-s.msda.ge',
+            host: 'bl-d.msda.ge',
+            port: '3033',
+            path: '/api/'
+        }
+    }
+};
+
+exports.development = function (app) {
+    return {
+        zErrorsClient: {
+            host: 'bl-d.msda.ge',
             port: '3033',
             path: '/api/'
         }
@@ -24,7 +34,7 @@ exports.staging = function (app) {
 exports.production = function (app) {
     return {
         zErrorsClient: {
-            host: 'bl-s.msda.ge',
+            host: 'bl.msda.ge',
             port: '3033',
             path: '/api/'
         }

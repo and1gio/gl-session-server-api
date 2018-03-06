@@ -1,7 +1,7 @@
 {
   "name": "z-session-server-api",
   "description": "Z Session Server API",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "node ./app.js"
@@ -10,34 +10,22 @@
     "node": ">= 4.4.3 < 6"
   },
   "dependencies": {
-
-    "async": "2.0.1",
-    "camelcase": "3.0.0",
-    "lodash": "4.17.0",
-    "pug": "2.0.0-beta6",
-    "winston": "2.2.0",
-    "z-api-request-helper-initializer": "0.0.2",
-    "z-errors-client-initializer": "0.0.1",
-    "z-express-initializer": "0.0.3",
-    "z-file-server-client-initializer": "0.0.2",
-    "z-filter-initializer": "0.0.1",
-    "z-http-server-initializer": "0.0.2",
+    "async": "2.6.0",
+    "camelcase": "4.1.0",
+    "lodash": "4.17.5",
+    "winston": "2.4.0",
+    "z-api-request-helper-initializer": "0.0.4",
+    "z-errors-client-initializer": "0.0.2",
+    "z-express-initializer": "0.0.5",
+    "z-filter-initializer": "0.0.3",
+    "z-http-server-initializer": "0.0.3",
     "z-route-controller-initializer": "0.0.3",
     "z-route-initializer": "0.0.2",
-    "z-session-initializer": "0.0.3",
-    "z-translate-client-initializer": "0.0.1",
-    "z-validator-initializer": "0.0.4",
-    "moment": "2.14.1",
-    "mongodb": "1.4.5",
-    "mongoose": "4.1.8"
-
-
-  },
-  "devDependencies": {
-    "concurrently": "2.0.0",
-    "gulp": "3.9.0",
-    "gulp-concat": "2.6.0",
-    "gulp-nodemon": "2.0.6",
-    "run-sequence": "1.1.5"
+    "z-session-initializer": "0.0.6",
+    "z-translate-client-initializer": "0.0.2",
+    "z-validator-initializer": "0.0.7",
+    "moment": "2.21.0",
+    "mongodb": "3.0.4",
+    "mongoose": "5.0.9"
   }
 }
