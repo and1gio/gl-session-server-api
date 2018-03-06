@@ -4,7 +4,6 @@ module.exports = function (app) {
 
     var router = require('express').Router();
 
-
     /**
      * userToken: {require: true}
      * sessionToken: {require: true}
@@ -13,9 +12,9 @@ module.exports = function (app) {
      */
     router.post(
         '/add-edit',
-        app.validator.validate(),
+        app.zValidator.check(app.zValidator.api.session.addEdit),
         function (req, res, next) {
-            app.routeController.api.session.addEdit(req, function (errors, data) {
+            app.zService.api.session.addEdit(req, function (errors, data) {
                 errors ? next(errors) : res.json(data);
             });
         });
@@ -26,7 +25,7 @@ module.exports = function (app) {
     router.post(
         '/get/by/session-token',
         function (req, res, next) {
-            app.routeController.api.session.getBySessionToken(req, function (errors, data) {
+            app.zService.api.session.getBySessionToken(req, function (errors, data) {
                 errors ? next(errors) : res.json(data);
             });
         });
@@ -37,7 +36,7 @@ module.exports = function (app) {
     router.post(
         '/get/by/user-token',
         function (req, res, next) {
-            app.routeController.api.session.getByUserToken(req, function (errors, data) {
+            app.zService.api.session.getByUserToken(req, function (errors, data) {
                 errors ? next(errors) : res.json(data);
             });
         });
@@ -48,7 +47,7 @@ module.exports = function (app) {
     router.post(
         '/delete/by/session-token',
         function (req, res, next) {
-            app.routeController.api.session.deleteBySessionToken(req, function (errors, data) {
+            app.zService.api.session.deleteBySessionToken(req, function (errors, data) {
                 errors ? next(errors) : res.json(data);
             });
         });
@@ -59,7 +58,7 @@ module.exports = function (app) {
     router.post(
         '/delete/by/user-token',
         function (req, res, next) {
-            app.routeController.api.session.deleteByUserToken(req, function (errors, data) {
+            app.zService.api.session.deleteByUserToken(req, function (errors, data) {
                 errors ? next(errors) : res.json(data);
             });
         });
@@ -70,7 +69,7 @@ module.exports = function (app) {
     router.post(
         '/delete/all',
         function (req, res, next) {
-            app.routeController.api.session.deleteAll(req, function (errors, data) {
+            app.zService.api.session.deleteAll(req, function (errors, data) {
                 errors ? next(errors) : res.json(data);
             });
         });

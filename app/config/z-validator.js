@@ -4,7 +4,7 @@ exports.default = function (app) {
             rootDir: 'validator-rules',
             useZFormat: true,
             format: 'flat',
-            log: false
+            log: true
         }
     }
 };
