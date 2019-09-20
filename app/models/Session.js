@@ -4,7 +4,7 @@ module.exports = function (app) {
     var Mixed = mongoose.Schema.Types.Mixed;
 
     var Session = mongoose.Schema({
-        sessionToken: {type: String, required: true, unique: true},
+        sessionToken: {type: String, required: true},
         userToken: {type: String, required: true},
         expireAt: {type: Date, index: { expireAfterSeconds: 0 }},
         sessionData: {type: Mixed, required: true},
