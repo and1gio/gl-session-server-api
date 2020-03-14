@@ -10,13 +10,13 @@ module.exports = function (app) {
     bl.addEdit = function (req, cb) {
         var params = req.body.data;
 
-        app.mongoDB.models.Session.getBySessionToken(params.sessionToken, function (retrieveError, data) {
+        app.mongoDB.models.OldSession.getBySessionToken(params.sessionToken, function (retrieveError, data) {
             if (retrieveError) {
                 return cb([{keyword: 'ERROR_WHILE_RETRIEVING_SESSION'}], null);
             }
 
             if(!data){
-                data = new app.mongoDB.models.Session(params);
+                data = new app.mongoDB.models.OldSession(params);
             }
 
             data.userToken = params.userToken;
@@ -30,6 +30,7 @@ module.exports = function (app) {
             }
 
             data.save(function (saveError) {
+console.log(saveError)
                 if (saveError) {
                     return cb([{keyword: 'ERROR_WHILE_SAVING_SESSION', e: saveError}], null);
                 }
@@ -40,17 +41,23 @@ module.exports = function (app) {
 
     bl.getBySessionToken = function (req, cb) {
         var params = req.body.data;
-
+		//console.log("1111111111111111111111111111", params);
         // TODO - we have to replace this with gl-params-validator module
         if (!params || !params.sessionToken) {
             return cb([{keyword: 'SESSION_TOKEN_REQUIRED'}], null);
         }
 
-        app.mongoDB.models.Session.getBySessionToken(params.sessionToken, function (error, data) {
-            if (error) {
-                return cb([{keyword: 'ERROR_WHILE_RETRIEVING_SESSION'}], null);
-            }
-
+        app.mongoDB.models.OldSession.getBySessionToken(params.sessionToken, function (error, data) {
+            //console.log("222222222222222222222222222", data);
+			if (error) {
+				app.mongoDB.models.OldSession.getBySessionToken(params.sessionToken, function (error, data) {
+					if (error) {
+                		return cb([{keyword: 'ERROR_WHILE_RETRIEVING_SESSION'}], null);
+					}
+					return cb(null, {result: {data: data}});
+            	});
+			}
+			//console.log(params.sessionToken);
             if (data) {
                 if(data.sessionData && data.sessionData.inactiveMinutesBeforeSessionDies){
                     data.expireAt = app.moment().add(data.sessionData.inactiveMinutesBeforeSessionDies, EXTEND_SESSION_BY_DIMENSION);
@@ -59,9 +66,31 @@ module.exports = function (app) {
                 }
 
                 data.save(function (saveError) {});
-            }
+				cb(null, {result: {data: data}});
+            } else {
+				console.log("333333333333333333333333333333");
+				app.mongoDB.models.OldSession.getBySessionToken(params.sessionToken, function (error, data) {
+                    if (error) {
+                        return cb([{keyword: 'ERROR_WHILE_RETRIEVING_SESSION'}], null);
+                    }
+					if (data) {
+						console.log("####################", data);
+						var t = {};
+						t.sessionData = {user: data.data};
+						t.sessionData.sessionId = data.token;
+						t.sessionToken = data.token;
+						t.userToken = data.data.id;
+						if (!t.sessionData.user.clientId) {
+							t.sessionData.user.clientId = t.sessionData.user.currentClientId;
+						}
+						console.log("111111111111111111111", params.sessionToken, t, {result: {data: data.data}});
+						return cb(null, {result: {data: t}});
+					}
+                    return cb(null, {result: {data: data}});
+                });
 
-            cb(null, {result: {data: data}});
+			}
+            //cb(null, {result: {data: data}});
         });
     };
 
@@ -72,8 +101,8 @@ module.exports = function (app) {
         if (!params || !params.userToken) {
             return cb([{keyword: 'USER_TOKEN_REQUIRED'}], null);
         }
-
-        app.mongoDB.models.Session.getByUserToken(params.userToken, function (error, data) {
+		console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        app.mongoDB.models.OldSession.getByUserToken(params.userToken, function (error, data) {
             if (error) {
                 return cb([{keyword: 'ERROR_WHILE_RETRIEVING_SESSION'}], null);
             }
@@ -100,7 +129,7 @@ module.exports = function (app) {
             return cb([{keyword: 'SESSION_TOKEN_REQUIRED'}], null);
         }
 
-        app.mongoDB.models.Session.getBySessionToken(params.sessionToken, function (retrieveError, data) {
+        app.mongoDB.models.OldSession.getBySessionToken(params.sessionToken, function (retrieveError, data) {
             if (retrieveError) {
                 return cb([{keyword: 'ERROR_WHILE_RETRIEVING_SESSION'}], null);
             }
@@ -109,7 +138,7 @@ module.exports = function (app) {
                 return cb(null, {result: {data: {success: true}}});
             }
 
-            app.mongoDB.models.Session.remove({_id: data._id}, function (deleteError) {
+            app.mongoDB.models.OldSession.remove({_id: data._id}, function (deleteError) {
                 if (deleteError) {
                     return cb([{keyword: 'ERROR_WHILE_DELETING_SESSION'}], null);
                 }

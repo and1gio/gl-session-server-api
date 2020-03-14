@@ -23,7 +23,7 @@ module.exports = {
         connection.once('open', function () {
             app.logger.info('### connected ###');
             require(app.folderPath.app.root + '/' + app.config.mongoose.modelsDir + '/Session')(app);
-
+			require(app.folderPath.app.root + '/' + app.config.mongoose.modelsDir + '/OldSession')(app);
             next();
         });
     }
