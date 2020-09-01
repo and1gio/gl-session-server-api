@@ -29,7 +29,7 @@
     "z-validator-initializer": "0.0.4",
     "moment": "2.14.1",
     "mongodb": "1.4.5",
-    "mongoose": "4.1.8"
+    "mongoose": "5.10.2"
 
 
   },
