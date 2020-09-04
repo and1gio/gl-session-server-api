@@ -28,7 +28,7 @@
     "z-translate-client-initializer": "0.0.1",
     "z-validator-initializer": "0.0.4",
     "moment": "2.14.1",
-    "mongodb": "1.4.5",
+    "mongodb": "3.6.1",
     "mongoose": "4.1.8"
 
 
