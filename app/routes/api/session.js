@@ -27,7 +27,7 @@ module.exports = function (app) {
         '/get/by/session-token',
         function (req, res, next) {
             app.routeController.api.session.getBySessionToken(req, function (errors, data) {
-                errors ? next(errors) : res.json(data);
+				errors ? next(errors) : res.json(data);
             });
         });
 
