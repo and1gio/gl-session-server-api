@@ -24,8 +24,8 @@ exports.staging = function (app) {
 exports.production = function (app) {
     return {
         zTranslateClient: {
-            host: 'bl-s.msda.ge',
-            port: '3032',
+            host: 'translations.msda.ge',
+            port: '80',
             path: '/api/'
         }
     }
