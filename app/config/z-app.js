@@ -4,7 +4,7 @@
 exports.default = function (app) {
     return {
         zApp: {
-            port: 5000,
+            port: 8080,
             debug: true
         }
     }
