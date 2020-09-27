@@ -1,20 +1,14 @@
 {
   "name": "z-session-server-api",
   "description": "Z Session Server API",
-  "version": "0.0.1",
-  "private": true,
+  "version": "1.0.0",
   "scripts": {
     "start": "node ./app.js"
   },
-  "engines": {
-    "node": ">= 4.4.3 < 6"
-  },
   "dependencies": {
-
     "async": "2.0.1",
     "camelcase": "3.0.0",
-    "lodash": "4.17.0",
-    "pug": "2.0.0-beta6",
+    "lodash": "4.17.19",
     "winston": "2.2.0",
     "z-api-request-helper-initializer": "0.0.2",
     "z-errors-client-initializer": "0.0.1",
@@ -28,16 +22,7 @@
     "z-translate-client-initializer": "0.0.1",
     "z-validator-initializer": "0.0.4",
     "moment": "2.14.1",
-    "mongodb": "1.4.5",
-    "mongoose": "4.1.8"
-
-
-  },
-  "devDependencies": {
-    "concurrently": "2.0.0",
-    "gulp": "3.9.0",
-    "gulp-concat": "2.6.0",
-    "gulp-nodemon": "2.0.6",
-    "run-sequence": "1.1.5"
+    "mongodb": "3.6.1",
+    "mongoose": "5.10.2"
   }
 }

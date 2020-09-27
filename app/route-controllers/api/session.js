@@ -33,7 +33,6 @@ module.exports = function (app) {
             }
 
             data.save(function (saveError) {
-		console.log(saveError)
                 if (saveError) {
                     return cb([{keyword: 'ERROR_WHILE_SAVING_SESSION', e: saveError}], null);
                 }
@@ -44,14 +43,12 @@ module.exports = function (app) {
 
     bl.getBySessionToken = function (req, cb) {
         var params = req.body.data;
-		//console.log("1111111111111111111111111111", params);
         // TODO - we have to replace this with gl-params-validator module
         if (!params || !params.sessionToken) {
             return cb([{keyword: 'SESSION_TOKEN_REQUIRED'}], null);
         }
 
         app.mongoDB.models.OldSession.getBySessionToken(params.sessionToken, function (error, data) {
-            //console.log("222222222222222222222222222", data);
 			if (error) {
 				app.mongoDB.models.OldSession.getBySessionToken(params.sessionToken, function (error, data) {
 					if (error) {
@@ -60,7 +57,6 @@ module.exports = function (app) {
 					return cb(null, {result: {data: data}});
             	});
 			}
-			//console.log(params.sessionToken);
             if (data) {
                 if(data.sessionData && data.sessionData.inactiveMinutesBeforeSessionDies){
                     data.expireAt = app.moment().add(data.sessionData.inactiveMinutesBeforeSessionDies, EXTEND_SESSION_BY_DIMENSION);
@@ -101,7 +97,6 @@ module.exports = function (app) {
         if (!params || !params.userToken) {
             return cb([{keyword: 'USER_TOKEN_REQUIRED'}], null);
         }
-		console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         app.mongoDB.models.OldSession.getByUserToken(params.userToken, function (error, data) {
             if (error) {
                 return cb([{keyword: 'ERROR_WHILE_RETRIEVING_SESSION'}], null);

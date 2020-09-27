@@ -11,7 +11,7 @@ module.exports = {
         };
 
         app.logger.info('### connecting to mongo ###');
-        app.mongoDB.mongoose.connect(app.config.mongoose.uri);
+        app.mongoDB.mongoose.connect(app.config.mongoose.uri, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 
         var connection = app.mongoDB.mongoose.connection;
 
