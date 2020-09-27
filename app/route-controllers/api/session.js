@@ -16,9 +16,12 @@ module.exports = function (app) {
             }
 
             if(!data){
-                data = new app.mongoDB.models.OldSession(params);
+		// TODO.. here must be OldSession model
+                data = new app.mongoDB.models.Session(params);
             }
 
+
+	    //data.token = params.userToken;
             data.userToken = params.userToken;
             data.sessionToken = params.sessionToken;
             data.sessionData = params.sessionData;
@@ -30,7 +33,7 @@ module.exports = function (app) {
             }
 
             data.save(function (saveError) {
-console.log(saveError)
+		console.log(saveError)
                 if (saveError) {
                     return cb([{keyword: 'ERROR_WHILE_SAVING_SESSION', e: saveError}], null);
                 }
@@ -68,13 +71,11 @@ console.log(saveError)
                 data.save(function (saveError) {});
 				cb(null, {result: {data: data}});
             } else {
-				console.log("333333333333333333333333333333");
 				app.mongoDB.models.OldSession.getBySessionToken(params.sessionToken, function (error, data) {
                     if (error) {
                         return cb([{keyword: 'ERROR_WHILE_RETRIEVING_SESSION'}], null);
                     }
 					if (data) {
-						console.log("####################", data);
 						var t = {};
 						t.sessionData = {user: data.data};
 						t.sessionData.sessionId = data.token;
@@ -83,7 +84,6 @@ console.log(saveError)
 						if (!t.sessionData.user.clientId) {
 							t.sessionData.user.clientId = t.sessionData.user.currentClientId;
 						}
-						console.log("111111111111111111111", params.sessionToken, t, {result: {data: data.data}});
 						return cb(null, {result: {data: t}});
 					}
                     return cb(null, {result: {data: data}});
