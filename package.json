@@ -20,7 +20,7 @@
     "z-session-initializer": "0.0.3",
     "z-translate-client-initializer": "0.0.1",
     "z-validator-initializer": "0.0.4",
-    "moment": "2.14.1",
+    "moment": "2.19.3",
     "mongodb": "3.6.1",
     "mongoose": "5.10.2"
   }
